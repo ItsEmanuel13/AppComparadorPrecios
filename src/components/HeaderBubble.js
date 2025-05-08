@@ -76,11 +76,21 @@ const HeaderBubble = () => {
         bgcolor: '#fff',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
         borderRadius: '8px',
-        padding: '0.5rem 2rem',
+        padding: '0.5rem 1rem',
         display: 'flex',
         alignItems: 'center',
+        flexWrap: 'wrap', // Permite que los elementos bajen en pantallas chicas
+        gap: '0.5rem',
         zIndex: 1000,
-        gap: "0.5rem", // Espaciado uniforme entre elementos
+        maxWidth: '95%',
+        justifyContent: 'center',
+        '@media (max-width: 600px)': {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          position: 'static',
+          transform: 'none',
+          padding: '1rem',
+        }
       }}
     >
       <Link to="/HomePage" style={{ textDecoration: 'none' }}>
@@ -108,36 +118,36 @@ const HeaderBubble = () => {
       </Menu>
 
       <Link to="/Carrito" style={{ textDecoration: "none" }}>
-      <Badge
-        badgeContent={totalCarrito}
-        color="error"
-        sx={{
-          "& .MuiBadge-badge": {
-            fontSize: "10px",
-            fontWeight: "bold",
-            padding: "6px",
-            minWidth: "16px",
-            height: "16px",
-            borderRadius: "50%",
-          },
-        }}
-      >
-        
-        <MdShoppingCart   size={40} sx={{ fontSize: 20, marginLeft: '30px'}} />
-      </Badge>
-    </Link>
+        <Badge
+          badgeContent={totalCarrito}
+          color="error"
+          sx={{
+            "& .MuiBadge-badge": {
+              fontSize: "10px",
+              fontWeight: "bold",
+              padding: "6px",
+              minWidth: "16px",
+              height: "16px",
+              borderRadius: "50%",
+            },
+          }}
+        >
 
-      <Link to="/formscraping" style={{ textDecoration: 'none' }}>
-        <Button variant="text" color="primary">Extraer</Button>
+          <MdShoppingCart size={40} sx={{ fontSize: 20, marginLeft: '30px' }} />
+        </Badge>
       </Link>
 
+      {/* <Link to="/formscraping" style={{ textDecoration: 'none' }}>
+        <Button variant="text" color="primary">Extraer</Button>
+      </Link> */}
+
       {user ? (
-         
+
         <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
           <Typography variant="text" sx={{ mr: 2 }} fontSize={"14pt"}>Hola,{user.name}</Typography>
-          <Button  color="primary" onClick={handleLogout} sx={{  padding: '5px 10px' }}><GrPowerShutdown size={25} /> </Button>
+          <Button color="primary" onClick={handleLogout} sx={{ padding: '5px 10px' }}><GrPowerShutdown size={25} /> </Button>
         </Box>
-        
+
       ) : (
         <Link to="/" style={{ textDecoration: 'none' }}>
           <Button variant="contained" color="primary">Login</Button>
